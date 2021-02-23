@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">平安TRTC Demo</string>
+    <string name="is_develop">是否为测试环境</string>
+    <string name="user_token">UserToken</string>
+    <string name="tip_input_user_token">请输入登录所需UserToken</string>
+    <string name="button_login">登录</string>
+    <string name="use_default_user_token">使用默认UserToken</string>
+    <string name="call_adult_doctor">呼叫成人医生</string>
+    <string name="call_child_doctor">呼叫儿童医生</string>
+    <string name="tip_input_call_user_token">请输入呼叫指定UserToken</string>
+    <string name="button_call_user_token">开始呼叫</string>
+    <string name="button_direct_call">直接呼叫</string>
+</resources>

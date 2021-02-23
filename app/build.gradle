@@ -1,0 +1,92 @@
+import java.text.SimpleDateFormat
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+static def increasedVersionCode() {
+    return (int) (System.currentTimeMillis() / 1000 / 60)
+}
+
+static def buildTime() {
+    def df = new SimpleDateFormat("MMddHH")
+    return df.format(new Date())
+}
+
+def sdkVersion = "3.0.6.02031922"
+
+def baseVersion = "3.0.6"
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "com.hhmedic.demo.trtc.pingan"
+        minSdkVersion 17
+        targetSdkVersion 29
+        versionCode increasedVersionCode()
+        versionName "$baseVersion.${buildTime()}"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+    android.applicationVariants.all { variant ->
+
+        variant.outputs.all
+                {
+
+                    outputFileName = "hh_android_trtc_pingan_demo_${defaultConfig.versionName}.apk"
+
+                }
+    }
+}
+
+dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation "com.hhmedic.android.sdk:trtc_pingan:$sdkVersion"
+
+}
