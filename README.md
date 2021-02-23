@@ -1,0 +1,2 @@
+# HHTRTCPinganDemo
+平安jcenter视频医生SDK接入Demo
