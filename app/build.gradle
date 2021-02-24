@@ -14,7 +14,7 @@ static def buildTime() {
     return df.format(new Date())
 }
 
-def sdkVersion = "3.0.8.02241008"
+def sdkVersion = "3.0.8.02241107"
 
 def baseVersion = "3.0.8"
 
