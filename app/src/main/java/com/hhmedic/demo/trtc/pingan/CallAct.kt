@@ -1,14 +1,18 @@
 package com.hhmedic.demo.trtc.pingan
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.google.gson.Gson
 import com.hhmedic.android.sdk.HHDoctor
 import com.hhmedic.android.sdk.listener.HHCallExListener
 import com.hhmedic.android.sdk.model.HHCallInfo
 import com.hhmedic.demo.trtc.pingan.databinding.CallLayoutBinding
+import com.tencent.imsdk.v2.V2TIMManager
+import com.tencent.imsdk.v2.V2TIMMessage
+import com.tencent.imsdk.v2.V2TIMValueCallback
 
 class CallAct : BaseAct() {
 
@@ -25,7 +29,8 @@ class CallAct : BaseAct() {
         setExtension()
         mBinding.callAdult.setOnClickListener {
             HHDoctor.callForAdult(this,object : HHCallExListener {
-                override fun onFinish() {
+
+                override fun onFinish(time: Long) {
                 }
 
                 override fun onCalling() {
@@ -67,7 +72,9 @@ class CallAct : BaseAct() {
         mBinding.callChild.setOnClickListener {
             setExtension()
             HHDoctor.callForChild(this,object : HHCallExListener {
-                override fun onFinish() {
+
+
+                override fun onFinish(time: Long) {
                 }
 
                 override fun onCalling() {
@@ -113,7 +120,8 @@ class CallAct : BaseAct() {
                 return@setOnClickListener
             }
             HHDoctor.call(this,userToken,object : HHCallExListener {
-                override fun onFinish() {
+
+                override fun onFinish(time: Long) {
                 }
 
                 override fun onCalling() {
@@ -150,6 +158,30 @@ class CallAct : BaseAct() {
                 }
             })
         }
+
+        mBinding.sendMessage.setOnClickListener {
+            sendMessage()
+        }
+
+
+    }
+
+    private fun sendMessage() {
+
+        val user = User()
+        user.age = 18
+        user.name = "Test"
+        val json = Gson().toJson(user)
+        V2TIMManager.getInstance().sendC2CCustomMessage(json.toByteArray(Charsets.UTF_8),"100839328", object : V2TIMValueCallback<V2TIMMessage> {
+            override fun onSuccess(t: V2TIMMessage?) {
+                Log.e("send message","send message success")
+            }
+
+            override fun onError(code: Int, desc: String?) {
+                Log.e("send message","send message failed")
+            }
+
+        })
     }
 
     private fun setExtension() {

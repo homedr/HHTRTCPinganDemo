@@ -18,6 +18,7 @@ class HHApp : Application() {
     override fun onCreate() {
         super.onCreate()
         initSDK()
+        Tim.init(this)
     }
 
     private fun initSDK() {

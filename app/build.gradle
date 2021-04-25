@@ -14,9 +14,11 @@ static def buildTime() {
     return df.format(new Date())
 }
 
-def sdkVersion = "3.0.8.02241107"
+//def sdkVersion = "3.1.0.04121636"
 
-def baseVersion = "3.0.8"
+def baseVersion = "3.1.0"
+
+def T_ImSdk = '5.2.210'
 
 android {
     compileSdkVersion 29
@@ -87,6 +89,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation "com.hhmedic.android.sdk:trtc_pingan:$sdkVersion"
+//    implementation "com.hhmedic.android.sdk:trtc_pingan:$sdkVersion"
+
+    implementation 'com.hh-medic.android.sdk:trtc_pingan:3.1.2.04151434'
+
+    implementation "com.tencent.imsdk:imsdk-smart:$T_ImSdk"
 
 }

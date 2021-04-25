@@ -10,4 +10,5 @@
     <string name="tip_input_call_user_token">请输入呼叫指定UserToken</string>
     <string name="button_call_user_token">开始呼叫</string>
     <string name="button_direct_call">直接呼叫</string>
+    <string name="button_send_message">发送消息</string>
 </resources>

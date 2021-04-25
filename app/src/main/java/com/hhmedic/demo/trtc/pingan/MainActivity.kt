@@ -10,12 +10,13 @@ import com.hhmedic.android.sdk.HHDoctor
 import com.hhmedic.android.sdk.listener.HHCallListener
 import com.hhmedic.android.sdk.listener.HHLoginListener
 import com.hhmedic.demo.trtc.pingan.databinding.ActivityMainBinding
+import kotlin.system.exitProcess
 
 class MainActivity : BaseAct() {
 
     private lateinit var mBinding:ActivityMainBinding
 
-    private val defaultUserToken = "8DC2FD1D49451309DF7123716BFF20843F0D04F68EA2608F6783B874E4F50EEF"
+    private var defaultUserToken = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,8 @@ class MainActivity : BaseAct() {
     }
 
     private fun initUI() {
+
+        defaultUserToken = if (LocalConfig.isDevelop(this)) "8DC2FD1D49451309DF7123716BFF20843F0D04F68EA2608F6783B874E4F50EEF" else "01E006BDE168EA1D9F9B88FFAFBF9784BB7A1F1299CAF508460D59212594CED3"
 
         initActionBar(mBinding.toolbar)
         hideBack()
@@ -56,7 +59,8 @@ class MainActivity : BaseAct() {
 
         mBinding.directCall.setOnClickListener {
             HHDoctor.callForAdult(this, object : HHCallListener {
-                override fun onFinish() {
+
+                override fun onFinish(time: Long) {
                 }
 
                 override fun onCalling() {
@@ -94,6 +98,6 @@ class MainActivity : BaseAct() {
 
     private fun switchReload() {
         Toast.makeText(this@MainActivity, "切换设置后需要重启打开APP才会生效", Toast.LENGTH_SHORT).show()
-        Handler().postDelayed({ System.exit(0) }, 1000)
+        Handler().postDelayed({ exitProcess(0) }, 1000)
     }
 }
